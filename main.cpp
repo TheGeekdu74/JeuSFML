@@ -31,9 +31,13 @@ int main()
     while (app.isOpen())
     {
         UdpSocket socket;
+        socket.setBlocking(false);
+        unsigned short port = 54000;
+
         Packet player1;
         Packet player2;
         Data data;
+
         data.x = 10;
         data.y = 20;
         data.hp = 100;
@@ -41,18 +45,17 @@ int main()
         player1 << data;
 
         // lie la socket à un port
-        if (socket.bind(54000) != Socket::Done)
+        if(socket.bind(port) != Socket::Done)
             printf("Erreur de connexion au port");
 
         IpAddress recipient = "127.0.0.1";
-        unsigned short port = 54000;
 
-        if (socket.send(player1, recipient, port) != Socket::Done)
+        if(socket.send(player1, recipient, port) != Socket::Done)
             printf("Erreur d'envoi");
 
         IpAddress sender;
 
-        if (socket.receive(player2, sender, port) != Socket::Done)
+        if(socket.receive(player2, sender, port) != Socket::Done)
             printf("Erreur de reception");
 
         Data data2;
