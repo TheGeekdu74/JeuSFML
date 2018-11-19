@@ -1,8 +1,9 @@
 # depslib dependency file v1.0
-1542620699 source:p:\m1102\jeusfml\jeu\main.cpp
+1542631357 source:p:\m1102\jeusfml\jeu\main.cpp
 	<SFML/Graphics.hpp>
 	<SFML/Network.hpp>
 	<iostream>
+	<unistd.h>
 
 1430682833 c:\sfml\include\sfml\graphics.hpp
 	<SFML/Window.hpp>
@@ -67,7 +68,7 @@
 	<SFML/System/Vector2.hpp>
 	<SFML/System/Vector3.hpp>
 
-1430682833 c:\sfml\include\sfml\config.hpp
+1430682834 c:\sfml\include\sfml\config.hpp
 	"TargetConditionals.h"
 
 1430682833 c:\sfml\include\sfml\system\clock.hpp
@@ -96,7 +97,7 @@
 	<SFML/Config.hpp>
 	<SFML/System/Export.hpp>
 
-1430682833 c:\sfml\include\sfml\system\noncopyable.hpp
+1541521304 c:\sfml\include\sfml\system\noncopyable.hpp
 	<SFML/System/Export.hpp>
 
 1430682833 c:\sfml\include\sfml\system\lock.hpp
