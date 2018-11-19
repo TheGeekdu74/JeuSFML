@@ -13,14 +13,13 @@ typedef struct{
     int dmgY;
 }Data;
 
-Packet& operator <<(Packet& packet, const Data& data)
+Packet& operator <<(sf::Packet& packet, const Data& data)
 {
-    return packet << data.x << data.y << data.hp << data.dmgX << data.dmgY;
+    return packet << data.x;
 }
-
-Packet& operator >>(Packet& packet, Data& data)
+Packet& operator >>(sf::Packet& packet, Data& data)
 {
-    return packet >> data.x >> data.y >> data.hp >> data.dmgX >> data.dmgY;
+    return packet >> data.x;
 }
 
 int main()
@@ -32,7 +31,7 @@ int main()
     {
         UdpSocket socket;
         socket.setBlocking(false);
-        unsigned short port = 54000;
+        unsigned short port = 80;
 
         Packet player1;
         Packet player2;
@@ -44,7 +43,7 @@ int main()
 
         player1 << data;
 
-        // lie la socket Ã  un port
+        // lie la socket à un port
         if(socket.bind(port) != Socket::Done)
             printf("Erreur de connexion au port");
 
@@ -59,7 +58,7 @@ int main()
             printf("Erreur de reception");
 
         Data data2;
-        player2 >> data2;
+        player2 >> data;
         cout << data2.hp << std::endl;
 
 
