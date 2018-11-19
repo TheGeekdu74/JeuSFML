@@ -3,12 +3,17 @@
 #include <iostream>
 #include <unistd.h>
 #include <cmath>
+#include <stdio.h>
+#include <stdlib.h>
 
 #define WINDOW_WIDTH 1280
 #define WINDOW_HEIGHT 768
 
 using namespace sf;
 using std::cout;
+
+enum Dir{Up,Down,Right,Left};
+Vector2i anim(1, Down);
 
 typedef struct{
     int x;
@@ -32,8 +37,8 @@ int main()
 
     Data data1;
     Data data2;
-    data1.x = 25;
-    data1.y = WINDOW_HEIGHT - 25;
+    data1.x = 128;
+    data1.y = WINDOW_HEIGHT - 128;
     data1.hp = 200;
     data2.hp = 200;
 
@@ -43,6 +48,12 @@ int main()
     RectangleShape rect(Vector2f(50,50));
     rect.setOrigin(25,25);
     rect.setPosition(data1.x, data1.y);
+
+    Texture perso;
+    if (!perso.loadFromFile("Jacky.png"))
+        return EXIT_FAILURE;
+    Sprite sprite(perso);
+    sprite.setOrigin(32,32);
 
     //------------- PLATFORM SETUP ---------------
 
@@ -114,27 +125,28 @@ int main()
             while(data1.y > 200 && rect.getGlobalBounds().intersects(platform.getGlobalBounds()) == 0){
                 data1.y -= 2;
                 usleep(0.1);
-                rect.setPosition(data1.x,data1.y);
+                sprite.setPosition(data1.x,data1.y);
 
                 cout << rect.getGlobalBounds().intersects(platform.getGlobalBounds()) << std::endl;
 
                 if(Keyboard::isKeyPressed(Keyboard::Q)){
                     if(data1.x >= 25){
                         data1.x -= 1;
-                        rect.setPosition(data1.x, data1.y);
+                        sprite.setPosition(data1.x, data1.y);
                     }
                 }
 
                 if(Keyboard::isKeyPressed(Keyboard::D)){
                     if(data1.x + 25 <= WINDOW_WIDTH){
                         data1.x += 1;
-                        rect.setPosition(data1.x, data1.y);
+                        sprite.setPosition(data1.x, data1.y);
                     }
                 }
 
                 app.clear();
                 app.draw(fond);
                 app.draw(rect);
+                app.draw(sprite);
                 app.draw(lifeBar1);
                 app.draw(lifeBarBorder1);
                 app.draw(lifeBarBorder2);
@@ -145,24 +157,25 @@ int main()
             while(data1.y + 25 < WINDOW_HEIGHT && rect.getGlobalBounds().intersects(platform.getGlobalBounds()) == 0){ //Descente jump
                 data1.y += 2;
                 usleep(0.1);
-                rect.setPosition(data1.x,data1.y);
+                sprite.setPosition(data1.x,data1.y);
 
                 if(Keyboard::isKeyPressed(Keyboard::Q)){
                     if(data1.x >= 25){
                         data1.x -= 1;
-                        rect.setPosition(data1.x, data1.y);
+                        sprite.setPosition(data1.x, data1.y);
                     }
                 }
 
                 if(Keyboard::isKeyPressed(Keyboard::D)){
                     if(data1.x + 25 <= WINDOW_WIDTH){
                         data1.x += 1;
-                        rect.setPosition(data1.x, data1.y);
+                        sprite.setPosition(data1.x, data1.y);
                     }
                 }
                 app.clear();
                 app.draw(fond);
                 app.draw(rect);
+                app.draw(sprite);
                 app.draw(lifeBar1);
                 app.draw(lifeBarBorder1);
                 app.draw(lifeBarBorder2);
@@ -176,20 +189,20 @@ int main()
             if(data1.x >= 25){
                 data1.x -= 1;
                 usleep(0.5);
-                rect.setPosition(data1.x, data1.y);
+                sprite.setPosition(data1.x, data1.y);
             }
         }
         if(Keyboard::isKeyPressed(Keyboard::S)){
             if(data1.y + 25 <= WINDOW_HEIGHT){
                 data1.y += 1;
-                rect.setPosition(data1.x, data1.y);
+                sprite.setPosition(data1.x, data1.y);
             }
         }
         if(Keyboard::isKeyPressed(Keyboard::D)){
             if(data1.x + 25 <= WINDOW_WIDTH){
                 data1.x += 1;
                 usleep(0.5);
-                rect.setPosition(data1.x, data1.y);
+                sprite.setPosition(data1.x, data1.y);
             }
         }
 
@@ -211,9 +224,16 @@ int main()
             }
         }
 
+        anim.x++;
+        if (anim.x * 65 >= perso.getSize().x)
+            anim.x = 0;
+
+        sprite.setTextureRect(IntRect(anim.x * 65, anim.y * 65, 65, 65));
+
         app.clear();
         app.draw(fond);
         app.draw(rect);
+        app.draw(sprite);
         app.draw(lifeBar1);
         app.draw(lifeBarBorder1);
         app.draw(lifeBarBorder2);
