@@ -1,10 +1,12 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Network.hpp>
+#include "collision.h"
 #include <iostream>
 #include <unistd.h>
+#include <cmath>
 
-#define WINDOW_WIDTH 800
-#define WINDOW_HEIGHT 600
+#define WINDOW_WIDTH 1280
+#define WINDOW_HEIGHT 768
 
 using namespace sf;
 using std::cout;
@@ -34,11 +36,19 @@ int main()
     data1.y = WINDOW_HEIGHT - 25;
     data1.hp = 200;
     data2.hp = 200;
+
     RenderWindow app(VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "SFML window");
     app.setFramerateLimit(500);
+
     RectangleShape rect(Vector2f(50,50));
     rect.setOrigin(25,25);
     rect.setPosition(data1.x, data1.y);
+
+    //------------- PLATFORM SETUP ---------------
+
+    RectangleShape platform(Vector2f(200, 50));
+    platform.setOrigin(100, 25);
+    platform.setPosition(WINDOW_WIDTH/2, WINDOW_HEIGHT/2);
 
     //------------- LIFE BARS SETUP --------------
 
@@ -54,19 +64,19 @@ int main()
 
     RectangleShape lifeBar2(Vector2f(data2.hp, 50));
     lifeBar2.setFillColor(Color::Red);
-    lifeBar2.setPosition(590, 10);
+    lifeBar2.setPosition(1070, 10);
 
     RectangleShape lifeBarBorder2(Vector2f(200, 50));
     lifeBarBorder2.setFillColor(Color::Transparent);
     lifeBarBorder2.setOutlineThickness(5);
     lifeBarBorder2.setOutlineColor(Color::White);
-    lifeBarBorder2.setPosition(590, 10);
+    lifeBarBorder2.setPosition(1070, 10);
 
     while (app.isOpen()){
 //        UdpSocket socket;
 //
 //        socket.setBlocking(false);
-//        unsigned short port = 80;
+//        unsigned short port = 54000;
 //
 //        Packet player1;
 //        Packet player2;
@@ -78,7 +88,7 @@ int main()
 //
 //        player1 << data;
 //
-//        if(socket.bind(port) != Socket::Done){}
+//        if(socket.bind(54000) != Socket::Done){}
 //
 //        IpAddress recipient = "127.0.0.1";
 //        if(socket.send(player1, recipient, port) != Socket::Done){}
@@ -91,10 +101,12 @@ int main()
 //        cout << data2.hp << std::endl;
 
         if(Keyboard::isKeyPressed(Keyboard::Z)){ //Montee jump
-            while(data1.y > 300){
+            while(data1.y > 200 && rect.getGlobalBounds().intersects(platform.getGlobalBounds()) == 0){
                 data1.y -= 2;
                 usleep(0.1);
                 rect.setPosition(data1.x,data1.y);
+
+                cout << rect.getGlobalBounds().intersects(platform.getGlobalBounds()) << std::endl;
 
                 if(Keyboard::isKeyPressed(Keyboard::Q)){
                     if(data1.x >= 25){
@@ -116,10 +128,11 @@ int main()
                 app.draw(lifeBarBorder1);
                 app.draw(lifeBarBorder2);
                 app.draw(lifeBar2);
+                app.draw(platform);
                 app.display();
             }
 
-            while(data1.y + 25 < WINDOW_HEIGHT){ //Descente jump
+            while(data1.y + 25 < WINDOW_HEIGHT && rect.getGlobalBounds().intersects(platform.getGlobalBounds()) == 0){ //Descente jump
                 data1.y += 2;
                 usleep(0.1);
                 rect.setPosition(data1.x,data1.y);
@@ -143,6 +156,7 @@ int main()
                 app.draw(lifeBarBorder1);
                 app.draw(lifeBarBorder2);
                 app.draw(lifeBar2);
+                app.draw(platform);
                 app.display();
             }
         }
@@ -192,6 +206,7 @@ int main()
         app.draw(lifeBarBorder1);
         app.draw(lifeBarBorder2);
         app.draw(lifeBar2);
+        app.draw(platform);
         app.display();
 
     }

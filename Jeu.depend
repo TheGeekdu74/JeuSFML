@@ -1,9 +1,11 @@
 # depslib dependency file v1.0
-1542631357 source:p:\m1102\jeusfml\jeu\main.cpp
+1542644165 source:p:\m1102\jeusfml\jeu\main.cpp
 	<SFML/Graphics.hpp>
 	<SFML/Network.hpp>
+	"collision.h"
 	<iostream>
 	<unistd.h>
+	<cmath>
 
 1430682833 c:\sfml\include\sfml\graphics.hpp
 	<SFML/Window.hpp>
@@ -457,4 +459,12 @@
 	<vector>
 
 1542624962 source:p:\m1102\jeusfml\jeu\functions.cpp
+
+1542634349 source:p:\m1102\jeusfml\jeu\collision.cpp
+	<SFML/Graphics.hpp>
+	<map>
+	"Collision.h"
+
+1542634380 p:\m1102\jeusfml\jeu\collision.h
+	<SFML/Graphics.hpp>
 

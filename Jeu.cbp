@@ -53,6 +53,8 @@
 			<Add directory="$(#sfml.lib)" />
 		</Linker>
 		<Unit filename="cb.bmp" />
+		<Unit filename="collision.cpp" />
+		<Unit filename="collision.h" />
 		<Unit filename="functions.cpp" />
 		<Unit filename="functions.h" />
 		<Unit filename="main.cpp" />
