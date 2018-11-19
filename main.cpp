@@ -35,8 +35,27 @@ int main()
     rect.setOrigin(25,25);
     rect.setPosition(data1.x, data1.y);
 
-    while (app.isOpen())
-    {
+    RectangleShape lifeBar1(Vector2f(200, 50));
+    lifeBar1.setFillColor(Color::Red);
+    lifeBar1.setPosition(10, 10);
+
+    RectangleShape lifeBarBorder1(Vector2f(200, 50));
+    lifeBarBorder1.setFillColor(Color::Transparent);
+    lifeBarBorder1.setOutlineThickness(5);
+    lifeBarBorder1.setOutlineColor(Color::White);
+    lifeBarBorder1.setPosition(10, 10);
+
+    RectangleShape lifeBar2(Vector2f(200, 50));
+    lifeBar2.setFillColor(Color::Red);
+    lifeBar2.setPosition(590, 10);
+
+    RectangleShape lifeBarBorder2(Vector2f(200, 50));
+    lifeBarBorder2.setFillColor(Color::Transparent);
+    lifeBarBorder2.setOutlineThickness(5);
+    lifeBarBorder2.setOutlineColor(Color::White);
+    lifeBarBorder2.setPosition(590, 10);
+
+    while (app.isOpen()){
 //        UdpSocket socket;
 //
 //        socket.setBlocking(false);
@@ -63,7 +82,6 @@ int main()
 //        Data data2;
 //        player2 >> data;
 //        cout << data2.hp << std::endl;
-
 
         if(Keyboard::isKeyPressed(Keyboard::Z)){
             if(data1.y >= 25){
@@ -98,8 +116,13 @@ int main()
                     break;
             }
         }
+
         app.clear();
         app.draw(rect);
+        app.draw(lifeBar1);
+        app.draw(lifeBarBorder1);
+        app.draw(lifeBarBorder2);
+        app.draw(lifeBar2);
         app.display();
 
     }
