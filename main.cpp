@@ -84,9 +84,51 @@ int main()
 //        cout << data2.hp << std::endl;
 
         if(Keyboard::isKeyPressed(Keyboard::Z)){
-            if(data1.y >= 25){
+            /*if(data1.y >= 25){
                 data1.y -= 1;
                 rect.setPosition(data1.x, data1.y);
+            }*/
+            while(data1.y>200){
+                data1.y -= 1;
+                usleep(0.1);
+                rect.setPosition(data1.x,data1.y);
+                if(Keyboard::isKeyPressed(Keyboard::Q)){
+            if(data1.x >= 25){
+               data1.x -= 1;
+                rect.setPosition(data1.x, data1.y);
+            }
+                }
+            if(Keyboard::isKeyPressed(Keyboard::D)){
+            if(data1.x + 25 <= WINDOW_WIDTH){
+               data1.x += 1;
+                rect.setPosition(data1.x, data1.y);
+            }
+            }
+                app.clear();
+                app.draw(rect);
+                app.display();
+
+            }
+            while(data1.y + 25 < WINDOW_HEIGHT){
+                data1.y += 1;
+                usleep(0.1);
+                rect.setPosition(data1.x,data1.y);
+                if(Keyboard::isKeyPressed(Keyboard::Q)){
+            if(data1.x >= 25){
+               data1.x -= 1;
+                rect.setPosition(data1.x, data1.y);
+            }
+                }
+            if(Keyboard::isKeyPressed(Keyboard::D)){
+            if(data1.x + 25 <= WINDOW_WIDTH){
+               data1.x += 1;
+                rect.setPosition(data1.x, data1.y);
+            }
+            }
+                app.clear();
+                app.draw(rect);
+                app.display();
+
             }
         }
         if(Keyboard::isKeyPressed(Keyboard::Q)){
