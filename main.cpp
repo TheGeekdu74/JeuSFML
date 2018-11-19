@@ -1,6 +1,5 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Network.hpp>
-#include "collision.h"
 #include <iostream>
 #include <unistd.h>
 #include <cmath>
@@ -39,22 +38,18 @@ int main()
     data2.hp = 200;
 
     RenderWindow app(VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "SFML window");
-<<<<<<< Updated upstream
     app.setFramerateLimit(500);
-=======
->>>>>>> Stashed changes
 
     RectangleShape rect(Vector2f(50,50));
     rect.setOrigin(25,25);
     rect.setPosition(data1.x, data1.y);
 
-<<<<<<< Updated upstream
     //------------- PLATFORM SETUP ---------------
 
     RectangleShape platform(Vector2f(200, 50));
     platform.setOrigin(100, 25);
     platform.setPosition(WINDOW_WIDTH/2, WINDOW_HEIGHT/2);
-=======
+
     //------------------ FOND --------------------
     Texture fond1;
     if (!fond1.loadFromFile("Map_une.jpg"))
@@ -64,8 +59,6 @@ int main()
     Sprite fond(fond1);
     fond.setPosition(0,0);
     app.draw(fond);
-
->>>>>>> Stashed changes
 
     //------------- LIFE BARS SETUP --------------
 
@@ -118,15 +111,9 @@ int main()
 //        cout << data2.hp << std::endl;
 
         if(Keyboard::isKeyPressed(Keyboard::Z)){ //Montee jump
-<<<<<<< Updated upstream
             while(data1.y > 200 && rect.getGlobalBounds().intersects(platform.getGlobalBounds()) == 0){
                 data1.y -= 2;
                 usleep(0.1);
-=======
-            while(data1.y > 200){
-                data1.y -= 2;
-                usleep(0.5);
->>>>>>> Stashed changes
                 rect.setPosition(data1.x,data1.y);
 
                 cout << rect.getGlobalBounds().intersects(platform.getGlobalBounds()) << std::endl;
@@ -155,16 +142,9 @@ int main()
                 app.draw(platform);
                 app.display();
             }
-<<<<<<< Updated upstream
-
             while(data1.y + 25 < WINDOW_HEIGHT && rect.getGlobalBounds().intersects(platform.getGlobalBounds()) == 0){ //Descente jump
                 data1.y += 2;
                 usleep(0.1);
-=======
-            while(data1.y + 25 < WINDOW_HEIGHT){ //Descente jump
-                data1.y += 2;
-                usleep(0.5);
->>>>>>> Stashed changes
                 rect.setPosition(data1.x,data1.y);
 
                 if(Keyboard::isKeyPressed(Keyboard::Q)){
