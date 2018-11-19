@@ -53,6 +53,8 @@
 			<Add directory="$(#sfml.lib)" />
 		</Linker>
 		<Unit filename="cb.bmp" />
+		<Unit filename="functions.cpp" />
+		<Unit filename="functions.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />
