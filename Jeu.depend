@@ -460,6 +460,7 @@
 
 1542624962 source:p:\m1102\jeusfml\jeu\functions.cpp
 
+<<<<<<< Updated upstream
 1542634349 source:p:\m1102\jeusfml\jeu\collision.cpp
 	<SFML/Graphics.hpp>
 	<map>
@@ -467,4 +468,13 @@
 
 1542634380 p:\m1102\jeusfml\jeu\collision.h
 	<SFML/Graphics.hpp>
+=======
+1542625695 source:p:\m1102\jeusfml\functions.cpp
+
+1542643223 source:p:\m1102\jeusfml\main.cpp
+	<SFML/Graphics.hpp>
+	<SFML/Network.hpp>
+	<iostream>
+	<unistd.h>
+>>>>>>> Stashed changes
 
